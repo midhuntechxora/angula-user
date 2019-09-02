@@ -31,6 +31,7 @@
               "src/styles.scss"
             ],
             "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
               "src/assets/js/sb-admin-2.min.js"
             ]
           },
