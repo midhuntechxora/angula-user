@@ -9,14 +9,15 @@ import { UserService } from '../shared/user.service';
 })
 export class HomeComponent implements OnInit {
   userDetails;
-  constructor( private router:Router,private service:UserService) { }
+  fullName = "midhun";
+  constructor(private router: Router, private service: UserService) { }
 
   ngOnInit() {
     this.service.getUserProfile().subscribe(
-      res=>{
+      res => {
         this.userDetails = res;
       },
-      err=>{
+      err => {
 
       }
     );
@@ -24,5 +25,8 @@ export class HomeComponent implements OnInit {
   onLogout() {
     localStorage.removeItem('token');
     this.router.navigate(['sign-in']);
+  }
+  onSubmit(value: any) {
+    console.log(value);
   }
 }

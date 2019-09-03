@@ -1,4 +1,4 @@
-
+<!-- 
   
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
               <a class="navbar-brand" href="#">Navbar</a>
@@ -22,7 +22,7 @@
                   </button>
                 </div>
               </div>
-            </nav>
+            </nav> -->
           <!-- End of Topbar -->
   
           <!-- Begin Page Content -->
@@ -30,11 +30,28 @@
   
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">{{userDetails?.fullName}}</h4>
-                <h6 class="card-subtitle text-muted">{{userDetails?.email}}</h6>
+                <h4 class="card-title">Full name {{fullName}} : {{userDetails?.fullName}}</h4>
+                <h6 class="card-subtitle text-muted">Email : {{userDetails?.email}}</h6>
+                <p class="card-text">Username : {{userDetails?.userName}}</p>
               </div>
               <div class="card-body">
-                <p class="card-text">{{userDetails?.userName}}</p>
+                <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+                  <div class="form-group">
+                    <label for="email">Full Name:</label>
+                    <input  class="form-control" #name="ngModel" required placeholder="Enter full name" name="name" [(ngModel)]="fullName">
+                    <div *ngIf="name.errors">
+                      <div [hidden]="!name.errors.required">
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" #username="ngModel" placeholder="Enter email" name="username" [(ngModel)]="userName">
+                  </div>
+                  <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Submit</button>
+                  
+                </form>
             </div>
   
           </div>
