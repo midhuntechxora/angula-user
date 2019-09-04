@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from '../user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
+  userDetail:User; 
   constructor( private fb:FormBuilder,
     private http:HttpClient) { }
     readonly baseURI = 'http://localhost:5000/api';
@@ -32,7 +33,11 @@ export class UserService {
     return this.http.post(this.baseURI+'/applicationuser/login',formData);
   }
   getUserProfile() {
-    return this.http.get(this.baseURI+'/user');
+    return this.http.get(this.baseURI+'/user').toPromise()
+    .then(res => this.userDetail = res as User);
+  }
+  PutUserProfile() {
+    return this.http.put(this.baseURI+'/user',this.userDetail);
   }
   roleMatch(allowedRoles): boolean {
     var isMatch = false;
